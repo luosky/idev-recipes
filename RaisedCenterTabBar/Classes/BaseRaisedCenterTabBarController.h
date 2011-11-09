@@ -25,10 +25,11 @@
 // THE SOFTWARE
 //
 
-@interface BaseViewController : UITabBarController
+@interface BaseRaisedCenterTabBarController : UITabBarController
 {
 }
 
+@property (nonatomic, assign) int centerViewControllerIndex;
 // Create a view controller and setup it's tab bar item with a title and image
 -(UIViewController*) viewControllerWithTabTitle:(NSString*)title image:(UIImage*)image;
 
