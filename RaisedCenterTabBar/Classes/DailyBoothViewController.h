@@ -25,9 +25,9 @@
 // THE SOFTWARE
 //
 
-#import "BaseViewController.h"
+#import "BaseRaisedCenterTabBarController.h"
 
-@interface DailyBoothViewController : BaseViewController
+@interface DailyBoothViewController : BaseRaisedCenterTabBarController
 {
 }
 

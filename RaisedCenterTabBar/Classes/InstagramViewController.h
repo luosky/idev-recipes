@@ -25,9 +25,9 @@
 // THE SOFTWARE
 //
 
-#import "BaseViewController.h"
+#import "BaseRaisedCenterTabBarController.h"
 
-@interface InstagramViewController : BaseViewController
+@interface InstagramViewController : BaseRaisedCenterTabBarController
 {
 }
 

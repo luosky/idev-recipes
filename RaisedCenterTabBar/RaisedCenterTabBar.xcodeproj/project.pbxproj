@@ -15,7 +15,7 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
-		7F8953F712B9944200316F8D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8953F612B9944200316F8D /* BaseViewController.m */; };
+		7F8953F712B9944200316F8D /* BaseRaisedCenterTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8953F612B9944200316F8D /* BaseRaisedCenterTabBarController.m */; };
 		7FC258B412B892450045C6DE /* InstagramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC258B312B892450045C6DE /* InstagramViewController.m */; };
 		7FC2599012B93BDE0045C6DE /* 112-group.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FC2598612B93BDE0045C6DE /* 112-group.png */; };
 		7FC2599112B93BDE0045C6DE /* 112-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FC2598712B93BDE0045C6DE /* 112-group@2x.png */; };
@@ -71,8 +71,8 @@
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7F8953F512B9944200316F8D /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		7F8953F612B9944200316F8D /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		7F8953F512B9944200316F8D /* BaseRaisedCenterTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = BaseRaisedCenterTabBarController.h; sourceTree = "<group>"; };
+		7F8953F612B9944200316F8D /* BaseRaisedCenterTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRaisedCenterTabBarController.m; sourceTree = "<group>"; };
 		7FC258B212B892450045C6DE /* InstagramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramViewController.h; sourceTree = "<group>"; };
 		7FC258B312B892450045C6DE /* InstagramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramViewController.m; sourceTree = "<group>"; };
 		7FC2598612B93BDE0045C6DE /* 112-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group.png"; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 				7FC259A112B93E880045C6DE /* PathViewController.m */,
 				7FC259F012B98E940045C6DE /* DailyBoothViewController.h */,
 				7FC259F112B98E940045C6DE /* DailyBoothViewController.m */,
-				7F8953F512B9944200316F8D /* BaseViewController.h */,
-				7F8953F612B9944200316F8D /* BaseViewController.m */,
+				7F8953F512B9944200316F8D /* BaseRaisedCenterTabBarController.h */,
+				7F8953F612B9944200316F8D /* BaseRaisedCenterTabBarController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -375,7 +375,7 @@
 				7FC258B412B892450045C6DE /* InstagramViewController.m in Sources */,
 				7FC259A212B93E880045C6DE /* PathViewController.m in Sources */,
 				7FC259F212B98E940045C6DE /* DailyBoothViewController.m in Sources */,
-				7F8953F712B9944200316F8D /* BaseViewController.m in Sources */,
+				7F8953F712B9944200316F8D /* BaseRaisedCenterTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

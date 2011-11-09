@@ -25,9 +25,9 @@
 // THE SOFTWARE
 //
 
-#import "BaseViewController.h"
+#import "BaseRaisedCenterTabBarController.h"
 
-@interface PathViewController : BaseViewController {
+@interface PathViewController : BaseRaisedCenterTabBarController {
 
 }
 
