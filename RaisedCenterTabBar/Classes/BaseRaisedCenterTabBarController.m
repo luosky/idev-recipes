@@ -55,16 +55,16 @@
     [button addTarget:self action:@selector(selectViewControllerAtIndex:) forControlEvents:UIControlEventTouchUpInside];
     
     CGFloat heightDifference = buttonImage.size.height - self.tabBar.frame.size.height;
+    CGPoint center = CGPointMake(self.tabBar.frame.size.width / 2 , self.tabBar.frame.size.height / 2);
     if (heightDifference < 0)
-        button.center = self.tabBar.center;
+        button.center = center;
     else
     {
-        CGPoint center = self.tabBar.center;
-        center.y = center.y - heightDifference/2.0;
+        center.y -= heightDifference/2.0;
         button.center = center;
-    }
+    }  
+    [self.tabBar addSubview:button];
     
-    [self.view addSubview:button];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
