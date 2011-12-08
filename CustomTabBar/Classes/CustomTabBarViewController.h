@@ -30,6 +30,8 @@
 @interface CustomTabBarViewController : UIViewController <CustomTabBarDelegate>
 {
   CustomTabBar* tabBar;
+    int tabBarHeight;
+    int selectedIndex;
 }
 
 @property (nonatomic, retain) CustomTabBar* tabBar;

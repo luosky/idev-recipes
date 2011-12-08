@@ -62,21 +62,20 @@ static NSArray* tabBarItems = nil;
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
-
-  // Use the TabBarGradient image to figure out the tab bar's height (22x2=44)
-  UIImage* tabBarGradient = [UIImage imageNamed:@"TabBarGradient.png"];
-  
-  // Create a custom tab bar passing in the number of items, the size of each item and setting ourself as the delegate
-  self.tabBar = [[[CustomTabBar alloc] initWithItemCount:tabBarItems.count itemSize:CGSizeMake(self.view.frame.size.width/tabBarItems.count, tabBarGradient.size.height*2) tag:0 delegate:self] autorelease];
-  
-  // Place the tab bar at the bottom of our view
-  tabBar.frame = CGRectMake(0,self.view.frame.size.height-(tabBarGradient.size.height*2),self.view.frame.size.width, tabBarGradient.size.height*2);
-  [self.view addSubview:tabBar];
-  
-  // Select the first tab
-  [tabBar selectItemAtIndex:0];
-  [self touchDownAtItemAtIndex:0];
+    [super viewDidLoad];
+    
+    tabBarHeight = 53;
+    
+    // Create a custom tab bar passing in the number of items, the size of each item and setting ourself as the delegate
+    self.tabBar = [[[CustomTabBar alloc] initWithItemCount:tabBarItems.count itemSize:CGSizeMake(self.view.frame.size.width/tabBarItems.count, tabBarHeight) tag:0 delegate:self] autorelease];
+    
+    // Place the tab bar at the bottom of our view
+    tabBar.frame = CGRectMake(0,self.view.frame.size.height-tabBarHeight,self.view.frame.size.width, tabBarHeight);
+    [self.view addSubview:tabBar];
+    
+    // Select the first tab
+    [tabBar selectItemAtIndex:0];
+    [self touchDownAtItemAtIndex:0];
 }
 
 #pragma mark -
@@ -84,10 +83,10 @@ static NSArray* tabBarItems = nil;
 
 - (UIImage*) imageFor:(CustomTabBar*)tabBar atIndex:(NSUInteger)itemIndex
 {
-  // Get the right data
-  NSDictionary* data = [tabBarItems objectAtIndex:itemIndex];
-  // Return the image for this tab bar item
-  return [UIImage imageNamed:[data objectForKey:@"image"]];
+    // Get the right data
+    NSDictionary* data = [tabBarItems objectAtIndex:itemIndex];
+    // Return the image for this tab bar item
+    return [UIImage imageNamed:[data objectForKey:@"image"]];
 }
 
 - (UIImage*) backgroundImage
@@ -164,28 +163,37 @@ static NSArray* tabBarItems = nil;
 
 - (void) touchDownAtItemAtIndex:(NSUInteger)itemIndex
 {
-  // Remove the current view controller's view
-  UIView* currentView = [self.view viewWithTag:SELECTED_VIEW_CONTROLLER_TAG];
-  [currentView removeFromSuperview];
-  
-  // Get the right view controller
-  NSDictionary* data = [tabBarItems objectAtIndex:itemIndex];
-  UIViewController* viewController = [data objectForKey:@"viewController"];
+    
+    // Remove the current view controller's view
+    NSDictionary* data = [tabBarItems objectAtIndex:selectedIndex];
+    UIViewController* viewController = [data objectForKey:@"viewController"];
+    if (viewController) {
+        [viewController viewWillDisappear:YES];
+        UIView* currentView = [self.view viewWithTag:SELECTED_VIEW_CONTROLLER_TAG];
+        [currentView removeFromSuperview];
+        [viewController viewDidDisappear:YES];
+    }
 
-  // Use the TabBarGradient image to figure out the tab bar's height (22x2=44)
-  UIImage* tabBarGradient = [UIImage imageNamed:@"TabBarGradient.png"];
+    // Get the view controller to show
+    data = [tabBarItems objectAtIndex:itemIndex];
+    viewController = [data objectForKey:@"viewController"];
 
-  // Set the view controller's frame to account for the tab bar
-  viewController.view.frame = CGRectMake(0,0,self.view.bounds.size.width, self.view.bounds.size.height-(tabBarGradient.size.height*2));
+    // Set the view controller's frame to account for the tab bar
+    viewController.view.frame = CGRectMake(0,0,self.view.bounds.size.width, self.view.bounds.size.height-tabBarHeight);
 
-  // Se the tag so we can find it later
-  viewController.view.tag = SELECTED_VIEW_CONTROLLER_TAG;
-  
-  // Add the new view controller's view
-  [self.view insertSubview:viewController.view belowSubview:tabBar];
-  
-  // In 1 second glow the selected tab
-  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addGlowTimerFireMethod:) userInfo:[NSNumber numberWithInteger:itemIndex] repeats:NO];
+    // Se the tag so we can find it later
+    viewController.view.tag = SELECTED_VIEW_CONTROLLER_TAG;
+
+    // Add the new view controller's view
+    [viewController viewWillAppear:YES];
+    [self.view insertSubview:viewController.view belowSubview:tabBar];
+    [viewController viewDidAppear:YES];
+    // In 1 second glow the selected tab
+    //  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addGlowTimerFireMethod:) userInfo:[NSNumber numberWithInteger:itemIndex] repeats:NO];
+    selectedIndex = itemIndex;
+
+    // In 1 second glow the selected tab
+      [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addGlowTimerFireMethod:) userInfo:[NSNumber numberWithInteger:itemIndex] repeats:NO];
   
 }
 
@@ -207,27 +215,25 @@ static NSArray* tabBarItems = nil;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-  // Let the tab bar that we're about to rotate
-  [tabBar willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-
-  // Adjust the current view in prepartion for the new orientation
-  UIView* currentView = [self.view viewWithTag:SELECTED_VIEW_CONTROLLER_TAG];
-  UIImage* tabBarGradient = [UIImage imageNamed:@"TabBarGradient.png"];
-
-  CGFloat width = 0, height = 0;
-  if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
-  {
-    width = self.view.window.frame.size.width;
-    height = self.view.window.frame.size.height;
-  }
-  else
-  {
-    width = self.view.window.frame.size.height;
-    height = self.view.window.frame.size.width;
-  }
-
-  currentView.frame = CGRectMake(0,0,width, height-(tabBarGradient.size.height*2));
+{// Let the tab bar that we're about to rotate
+    [tabBar willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // Adjust the current view in prepartion for the new orientation
+    UIView* currentView = [self.view viewWithTag:SELECTED_VIEW_CONTROLLER_TAG];
+    
+    CGFloat width = 0, height = 0;
+    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        width = self.view.window.frame.size.width;
+        height = self.view.window.frame.size.height;
+    }
+    else
+    {
+        width = self.view.window.frame.size.height;
+        height = self.view.window.frame.size.width;
+    }
+    
+    currentView.frame = CGRectMake(0,0,width, height-tabBarHeight);
 }
 
 - (void)dealloc
